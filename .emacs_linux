@@ -1,0 +1,234 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;;(package-initialize)
+
+;; MELPA
+(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+		    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   ["#000000" "#8b0000" "#00ff00" "#ffa500" "#7b68ee" "#dc8cc3" "#93e0e3" "#dcdccc"])
+ '(ansi-term-color-vector
+   [unspecified "#2e2a31" "#d8137f" "#17ad98" "#dc8a0e" "#796af5" "#bb60ea" "#796af5" "#bcbabe"])
+ '(beacon-color "#c82829")
+ '(compilation-message-face (quote default))
+ '(custom-safe-themes
+   (quote
+    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "eae831de756bb480240479794e85f1da0789c6f2f7746e5cc999370bbc8d9c8a" "264b639ee1d01cd81f6ab49a63b6354d902c7f7ed17ecf6e8c2bd5eb6d8ca09c" "ffac21ab88a0f4603969a24b96993bd73a13fe0989db7ed76d94c305891fad64" "41eb3fe4c6b80c7ad156a8c52e9dd6093e8856c7bbf2b92cc3a4108ceb385087" "85e6bb2425cbfeed2f2b367246ad11a62fb0f6d525c157038a0d0eaaabc1bfee" "7a2ac0611ded83cdd60fc4de55ba57d36600eae261f55a551b380606345ee922" "6daa09c8c2c68de3ff1b83694115231faa7e650fdbb668bc76275f0f2ce2a437" "146061a7ceea4ccc75d975a3bb41432382f656c50b9989c7dc1a7bb6952f6eb4" "25c242b3c808f38b0389879b9cba325fb1fa81a0a5e61ac7cae8da9a32e2811b" "d96587ec2c7bf278269b8ec2b800c7d9af9e22d816827639b332b0e613314dfd" "fec45178b55ad0258c5f68f61c9c8fd1a47d73b08fb7a51c15558d42c376083d" "12670281275ea7c1b42d0a548a584e23b9c4e1d2dabb747fd5e2d692bcd0d39b" "36746ad57649893434c443567cb3831828df33232a7790d232df6f5908263692" "9c4acf7b5801f25501f0db26ac3eee3dc263ed51afd01f9dcfda706a15234733" "5a39d2a29906ab273f7900a2ae843e9aa29ed5d205873e1199af4c9ec921aaab" "a62f0662e6aa7b05d0b4493a8e245ab31492765561b08192df61c9d1c7e1ddee" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" "4528fb576178303ee89888e8126449341d463001cb38abe0015541eb798d8a23" "b4f3d4a3cffaaca06f26a56d7f43753eac4e7c3852de69a811973643cbf6093c" "e13cc5c861639fbc43bf81a8babe186d43c082b3d486fd7b24a63a7d6509475c" "790e17ece59e0a134b0f818fddff5f061c55f3ab578c81425370f2c46182cf56" "626b07b755d1ae254394cf93677cbf84d59014808b2b47ac9ba6ab64bbb631cb" "3e1c239ff173e03f1d5b86a84555b7ef956f401aeab78058018ddb6301768b54" "32c7cff003b78348d23a6f7c5aaccbdf5d4d33400c7b26d2ea89dd2dae05ad14" "f139804e5b5742de9abea54354cc1c6eedcdde1d04be76670f613aa34e7cf31f" "6c1850f4566a6f70a759026d509ee164f51ae05b0d738fc7932f3d797b7f077b" "f8858bd8cde1116245194c98e64d6d3f1f93a7eeeab00c4ed2adf214502e9fe4" "ff8bf61361fec371001c1144b27b25717f6ee4ad6e049bd8def6e299c24b7cb0" "bbdc2c85e3fce8f6cb21c75bdc79825fd1242df83fc3a3ab4077248d7e143e5e" "56a0a5d5c6fe93765680afa5e3b3783e412d3edcb13a46f1f6d2e78c6ef4525c" "7367a24729c4c9123690f17dd75950e82e441c2ccd873fb32f4ca84a2bf62b8b" "37c57a17d49c18ea285c9aa02977c200a5b45fa4b80d0d6e438718b1be468cd8" "e15afc6c1681d4b8972ca1a928e902eb8d7caa912b2a6f214179b7c80fd70965" "667df00c40d3d5a432c2242827719daa38e76987aa3fdecdfe52335298bcc528" "93a92124759d2c86db125f565c59b3d49bb918e64805ccd33ecf1412d2aea6c1" "11bba098cc016ba89aba212e07aab38a8405d739983c08eadc7921484513d976" "bf6cf1b31a53d07e055f87aa638b465d33c9ba28bf9a780a80b67c6d75803b9e" "040c48c22a871a3f127ad2fa35a5f1cfe2e07872f1eddea9a943e3dbbd550c9b" "90f88addda76f8c17847c922b937f80a8a736768a1680f9760098cc5f5fa03f7" "32b71f27e5a6fc859fff9655ca2f18ef880aa30a23a76f0de7015f52f88ba714" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "ec3e6185729e1a22d4af9163a689643b168e1597f114e1cec31bdb1ab05aa539" "04790c9929eacf32d508b84d34e80ad2ee233f13f17767190531b8b350b9ef22" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "3de3f36a398d2c8a4796360bfce1fa515292e9f76b655bb9a377289a6a80a132" "8be07a2c1b3a7300860c7a65c0ad148be6d127671be04d3d2120f1ac541ac103" "25c06a000382b6239999582dfa2b81cc0649f3897b394a75ad5a670329600b45" "4bf5c18667c48f2979ead0f0bdaaa12c2b52014a6abaa38558a207a65caeb8ad" "ef04dd1e33f7cbd5aa3187981b18652b8d5ac9e680997b45dc5d00443e6a46e3" "87d46d0ad89557c616d04bef34afd191234992c4eb955ff3c60c6aa3afc2e5cc" "250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "3f67aee8f8d8eedad7f547a346803be4cc47c420602e19d88bdcccc66dba033b" "8543b328ed10bc7c16a8a35c523699befac0de00753824d7e90148bca583f986" "4a91a64af7ff1182ed04f7453bb5a4b0c3d82148d27db699df89a5f1d449e2a4" "7f1263c969f04a8e58f9441f4ba4d7fb1302243355cb9faecb55aec878a06ee9" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "34ed3e2fa4a1cb2ce7400c7f1a6c8f12931d8021435bad841fdc1192bd1cc7da" "3e34e9bf818cf6301fcabae2005bba8e61b1caba97d95509c8da78cff5f2ec8e" "0961d780bd14561c505986166d167606239af3e2c3117265c9377e9b8204bf96" "840db7f67ce92c39deb38f38fbc5a990b8f89b0f47b77b96d98e4bf400ee590a" "9be1d34d961a40d94ef94d0d08a364c3d27201f3c98c9d38e36f10588469ea57" "b8929cff63ffc759e436b0f0575d15a8ad7658932f4b2c99415f3dde09b32e97" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" "5a7830712d709a4fc128a7998b7fa963f37e960fd2e8aa75c76f692b36e6cf3c" "f869a5d068a371532c82027cdf1feefdc5768757c78c48a7e0177e90651503ad" "722e1cd0dad601ec6567c32520126e42a8031cd72e05d2221ff511b58545b108" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "d6922c974e8a78378eacb01414183ce32bc8dbf2de78aabcc6ad8172547cb074" "9b402e9e8f62024b2e7f516465b63a4927028a7055392290600b776e4a5b9905" "527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "6145e62774a589c074a31a05dfa5efdf8789cf869104e905956f0cbd7eda9d0e" "d2bd16a8bcf295dce0b70e1d2b5c17bb34cb28224a86ee770d56e6c22a565013" "b3bcf1b12ef2a7606c7697d71b934ca0bdd495d52f901e73ce008c4c9825a3aa" "73ad471d5ae9355a7fa28675014ae45a0589c14492f52c32a4e9b393fcc333fd" "1263771faf6967879c3ab8b577c6c31020222ac6d3bac31f331a74275385a452" "6271fc9740379f8e2722f1510d481c1df1fcc43e48fa6641a5c19e954c21cc8f" "350dc341799fbbb81e59d1e6fff2b2c8772d7000e352a5c070aa4317127eee94" "80930c775cef2a97f2305bae6737a1c736079fdcc62a6fdf7b55de669fbbcd13" "f984e2f9765a69f7394527b44eaa28052ff3664a505f9ec9c60c088ca4e9fc0b" "2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "df21cdadd3f0648e3106338649d9fea510121807c907e2fd15565dde6409d6e9" "36282815a2eaab9ba67d7653cf23b1a4e230e4907c7f110eebf3cdf1445d8370" "93268bf5365f22c685550a3cbb8c687a1211e827edc76ce7be3c4bd764054bad" "aea30125ef2e48831f46695418677b9d676c3babf43959c8e978c0ad672a7329" "85d609b07346d3220e7da1e0b87f66d11b2eeddad945cac775e80d2c1adb0066" "c9f102cf31165896631747fd20a0ca0b9c64ecae019ce5c2786713a5b7d6315e" "196df8815910c1a3422b5f7c1f45a72edfa851f6a1d672b7b727d9551bb7c7ba" "446cc97923e30dec43f10573ac085e384975d8a0c55159464ea6ef001f4a16ba" "d9dab332207600e49400d798ed05f38372ec32132b3f7d2ba697e59088021555" "d9850d120be9d94dd7ae69053630e89af8767c36b131a3aa7b06f14007a24656" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "5b8eccff13d79fc9b26c544ee20e1b0c499587d6c4bfc38cabe34beaf2c2fc77" "986e7e8e428decd5df9e8548a3f3b42afc8176ce6171e69658ae083f3c06211c" "1d079355c721b517fdc9891f0fda927fe3f87288f2e6cc3b8566655a64ca5453" "1025e775a6d93981454680ddef169b6c51cc14cea8cb02d1872f9d3ce7a1da66" "808b47c5c5583b5e439d8532da736b5e6b0552f6e89f8dafaab5631aace601dd" "aded4ec996e438a5e002439d58f09610b330bbc18f580c83ebaba026bbef6c82" "50b64810ed1c36dfb72d74a61ae08e5869edc554102f20e078b21f84209c08d1" "ffe80c88e3129b2cddadaaf78263a7f896d833a77c96349052ad5b7753c0c5a5" "cbd8e65d2452dfaed789f79c92d230aa8bdf413601b261dbb1291fb88605110c" "7bef2d39bac784626f1635bd83693fae091f04ccac6b362e0405abf16a32230c" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "dd4628d6c2d1f84ad7908c859797b24cc6239dfe7d71b3363ccdd2b88963f336" "0c3b1358ea01895e56d1c0193f72559449462e5952bded28c81a8e09b53f103f" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "cea3ec09c821b7eaf235882e6555c3ffa2fd23de92459751e18f26ad035d2142" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "b0c5c6cc59d530d3f6fbcfa67801993669ce062dda1435014f74cafac7d86246" "6ee6f99dc6219b65f67e04149c79ea316ca4bcd769a9e904030d38908fd7ccf9" "3629b62a41f2e5f84006ff14a2247e679745896b5eaa1d5bcfbc904a3441b0cd" "eea01f540a0f3bc7c755410ea146943688c4e29bea74a29568635670ab22f9bc" "c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" "77a46326228485699b378a8537f9bc5d6b0d087566ac179bec752fab322d814a" "9be17ebf3be94cb32ded9346e94475a73eaf7d77d70b27dad7f762a21c3cfa60" "7ef2884658a1fed818a11854c232511fa25721c60083a2695e6ea34ce14777ee" "cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" "1157a4055504672be1df1232bed784ba575c60ab44d8e6c7b3800ae76b42f8bd" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "ba3c5da197000aaf2f5514bef814b4d8bf1b6de7309b9fcd682ec26aa6a16fd2" "e4e97731f52a5237f37ceb2423cb327778c7d3af7dc831788473d4a76bcc9760" default)))
+ '(fci-rule-character-color "#1c1c1c")
+ '(fci-rule-color "#383838")
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(highlight-changes-colors (quote ("#ff8eff" "#ab7eff")))
+ '(highlight-tail-colors
+   (quote
+    (("#424748" . 0)
+     ("#63de5d" . 20)
+     ("#4BBEAE" . 30)
+     ("#1DB4D0" . 50)
+     ("#9A8F21" . 60)
+     ("#A75B00" . 70)
+     ("#F309DF" . 85)
+     ("#424748" . 100))))
+ '(magit-diff-use-overlays nil)
+ '(package-selected-packages
+   (quote
+    (pdf-tools xcscope color-theme-sanityinc-tomorrow ample-theme badger-theme cyberpunk-theme darkokai-theme monokai-alt-theme monokai-theme base16-theme)))
+ '(pos-tip-background-color "#E6DB74")
+ '(pos-tip-foreground-color "#242728")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#ff0066")
+     (40 . "#CF4F1F")
+     (60 . "#C26C0F")
+     (80 . "#E6DB74")
+     (100 . "#AB8C00")
+     (120 . "#A18F00")
+     (140 . "#989200")
+     (160 . "#8E9500")
+     (180 . "#63de5d")
+     (200 . "#729A1E")
+     (220 . "#609C3C")
+     (240 . "#4E9D5B")
+     (260 . "#3C9F79")
+     (280 . "#53f2dc")
+     (300 . "#299BA6")
+     (320 . "#2896B5")
+     (340 . "#2790C3")
+     (360 . "#06d8ff"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (unspecified "#242728" "#424748" "#F70057" "#ff0066" "#86C30D" "#63de5d" "#BEB244" "#E6DB74" "#40CAE4" "#06d8ff" "#FF61FF" "#ff8eff" "#00b2ac" "#53f2dc" "#f8fbfc" "#ffffff")))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; Save all tempfiles in $TMPDIR/emacs$UID/            
+    (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+    (setq backup-directory-alist
+        `((".*" . ,emacs-tmp-dir)))
+    (setq auto-save-file-name-transforms
+        `((".*" ,emacs-tmp-dir t)))
+    (setq auto-save-list-file-prefix
+        emacs-tmp-dir)
+
+;; Set default find directory
+(setq default-directory "~/")
+
+;; Set custom theme directory
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+;; Custom load path
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+;; Add El-Get directory to load path
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
+;; Set theme
+;;(load-theme 'zenburn)
+;;(load-theme 'base16-monokai)
+;;(load-theme 'darkokai)
+;;(load-theme 'monokai-alt)
+;;(load-theme 'base16-materia)
+;;(load-theme 'badger)
+;;(load-theme 'cyberpunk)
+(load-theme 'darkokai)
+
+;; Inhibit splash screen
+(setq inhibit-startup-screen t)
+
+;; Show line numbers
+(global-linum-mode t)
+(setq linum-format "%d ")
+
+;; Show column numbers
+(column-number-mode t)
+
+;; Cursor blink mode OFF
+(blink-cursor-mode -1)
+
+;; Default tab width
+(setq tab-width 4)
+
+;; Highlight matching delimiters
+(show-paren-mode 1)
+
+;; Reset default font
+;;(add-to-list 'default-frame-alist '(font . "Monospace Regular-11"))
+;;(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-13.5"))
+(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-11"))
+
+;; Set frame size
+(add-to-list 'default-frame-alist '(height . 51))
+(add-to-list 'default-frame-alist '(width . 90))
+
+;; Get rid of scrollbar and toolbar
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+;;(menu-bar-mode -1)
+
+;; Jedi setup
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+;;(setq jedi:setup-keys t)
+
+;; Toggle full screen with F11
+;;(defun toggle-fullscreen ()
+;;  "Toggle full screen on X11"
+;;  (Interactive)
+;;  (when (eq window-system 'x)
+;;    (set-frame-parameter
+;;     nil 'fullscreen
+;;     (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
+;;(global-set-key [f11] 'toggle-fullscreen)
+
+;; Comments in italics
+(setq w32-enable-italics t)
+(make-face-italic 'font-lock-comment-face)
+
+;; Open .cu files in c-mode
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c-mode))
+
+;; Open .m files in Octave mode
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+
+;; Default C-mode indentation style
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
+;; Browse recently opened files
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-xf" 'recentf-open-files)
+(run-at-time nil 300 'recentf-save-list)  ;; save every 5 minutes
+
+;; Enable xterm mouse mode by default
+(xterm-mouse-mode t)
+
+;; Default line wrapping for Text mode
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
+;; Disable electric-indent-mode by default
+(electric-indent-mode 0)
+
+;; cscope
+(require 'xcscope)
+(cscope-setup)
+
+;; exec-path-from-shell
+;;(when (memq window-system '(x gtk))
+;;  (exec-path-from-shell-initialize))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LaTeX shit
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+;;(setq-default TeX-master nil)
+;; On-the-fly spellcheck
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;; Allow for collapsing/expanding sections, macros, etc
+(add-hook 'LaTeX-mode-hook 'outline-minor-mode)
+(add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+;; Use "visual" word wrap for line wrappping (doesn't insert newline)
+(add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
+;; Integrate RefTeX into AUCTeX
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-auctex t)
+;; Integrate SyncTeX into AUCTeX
+;;(server-start)
+(add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+(add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+;;(setq TeX-source-correlate-method 'synctex)
+;;(setq TeX-source-correlate-start-server t)
+;; Add texlive to emacs' PATH
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/texlive/2017/bin/x86_64-linux"))
+(setq exec-path (append exec-path '("/usr/local/texlive/2017/bin/x86_64-linux")))
